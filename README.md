@@ -1,1 +1,1 @@
-﻿2013/02/06 : ClientBoard 과제 시작.
+﻿2013/02/06 : ClientBoard 과제 시작. Github 사용법 숙지 및 크롬에서 DB를 연동하기 위한 준비.
