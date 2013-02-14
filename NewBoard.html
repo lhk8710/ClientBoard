@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Board</title>
+<script type='text/javascript'
+	src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min..js'></script>
+<script type='text/javascript'
+	src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min..js'></script>
+
+<script type='text/javascript' src='BoardJS.js'></script>
+<script type="text/javascript" src="jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="http://malsup.github.com/jquery.corner.js"></script>
+<!-- 모서리 둥글게 할 계획. 일단 실패 -->
+<link rel='Stylesheet' type='text/css' href='common.css' />
+<link rel='Stylesheet' type='text/css' href='TableCss.css' />
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.8.22/themes/black-tie/jquery-ui.css">
+<!-- 검정 버튼 -->
+<link rel='Stylesheet' type='text/css'
+	href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/themes/smoothness/jquery-ui.css' />
+
+</head>
+<body onLoad="createDB(), createTable(), selectAllData(), init()">
+	<div id="mask" align="center"></div>
+	<br />
+	<br />
+	<br />
+	<br />
+	<div id="wrap">
+		<div id="header">사원 이혜균 - Q&A Board</div>
+		<div id="container">
+			<div class="snb">
+
+				<div align="center">
+					검색어를 입력하세요.<br />
+					<br /> <select id="searchID" class="searchClass" name="search">
+						<option value="01" selected="selected">이름</option>
+						<option value="02">제목</option>
+						<option value="03">내용</option>
+					</select> <input type="text" id="txSearch">&nbsp;
+					<button id='searchBtn'
+						class="ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all button_07eml"
+						onClick='search()'>검색</button>
+
+					<button id='writeBtn'
+						class="ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all button_07eml"
+						>쓰기</button>
+
+				</div>
+			</div>
+			<div id="content" align="center" style="overflow-y: scroll;">
+				<div class="write" id="writeid" align="center">
+					<h3 id="showwrite" hidden='true'>질문 올리기</h3>
+					<table border='1' id='mainTable' class='t_write'
+						bordercolor="#0176B4">
+						<th BGCOLOR=#fff8dc>제목</th>
+						<td style="bordercolor: #0176B4"><input type="text"
+							id="txTitle" size="90"></td>
+
+						<tbody>
+							<tr>
+								<th BGCOLOR=#fff8dc>이름</th>
+								<td style="bordercolor: #0176B4"><input type="text"
+									id="txName" size="90"></td>
+							</tr>
+						</tbody>
+
+						<tbody>
+							<tr>
+								<th BGCOLOR=#fff8dc>내용</th>
+								<td style="bordercolor: #0176B4"><textarea id="txContents"
+										rows="10" cols="111"></textarea></td>
+							</tr>
+						</tbody>
+
+						<tbody>
+							<tr>
+								<th BGCOLOR=#fff8dc>비번</th>
+								<td style="bordercolor: #0176B4"><input type="password"
+									id="txPW" maxlength="4"></td>
+							</tr>
+						</tbody>
+					</table>
+					
+					<p id='buttonT'>
+						<button id='insertBtn'
+							class="ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all button_07eml"
+							onClick="insertData()">질문 올리기</button>
+					</p>
+					
+				</div>
+
+				<div id="contentsList" class='testList' align="center">
+					<h3 id="showlist" align="center">List</h3>
+					<table border='1' cellpadding='2' cellspacing='5' class='t_write'
+						id='newTestBoard'></table>
+				</div>
+
+				<div id="hi" hidden="true" align="center">
+					<p></p>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div id="footer">2013/02/06 시작</div>
+	</div>
+</body>
+</html>
