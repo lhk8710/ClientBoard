@@ -1,0 +1,181 @@
+<html>
+<head>
+<title>댓글 창</title>
+
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+
+<script>
+		var index;
+		var db;
+		
+		function submitToParent(){
+			opener.document.all.text1.value = document.all.text2.value;
+		}
+
+		function get(){
+			var strURL = location.search;
+			var tmpParam = strURL.substring(1).split("&");
+			
+			if(strURL.substring(1).length > 0){
+				var Params = new Array;
+				for(var i=0; i<tmpParam.length; i++){
+					Params =tmpParam[i].split("=");
+					alert("Params_Name = " + Params[0]);
+					alert("Params_Value = " + Params[1]); // 받아짐
+					index = Params[1];
+					console.log("댓글 : " + index + "번");
+				}//for
+			}//if
+		}//function
+		
+
+		function createDB(){
+			db = window.openDatabase("myComment", "1.0", "게시판의 댓글 DB", 1024 * 1024);
+ 		}
+ 
+ 		function createTable(){
+  			db.transaction(function(tx){
+   				tx.executeSql("CREATE TABLE COMMENT(COUNT INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, TITLE TEXT NOT NULL, NAME TEXT NOT NULL, CONTENTS TEXT NOT NULL, INPUTDAY text DEFAULT current_timestamp NOT NULL, REFCNT INTEGER NOT NULL)"); 
+  			});
+ 		}
+ 
+ 		function insertData(){
+  			db.transaction(function(tx){
+   				tx.executeSql("insert into COMMENT(COUNT, TITLE, NAME, CONTENTS, REFCNT) values(NULL, ?,?,?,?)", [txTitle.value, txName.value, txContents.value,index]);
+  			});
+  			
+  			myRefresh();
+		}
+ 
+ 		function selectAllData(){
+ 			// all contents
+  			db.transaction(function(tx){
+   				tx.executeSql("select * from COMMENT where REFCNT=" + index,[],
+   					function(tx,result){            
+    					for(var i = 0; i < result.rows.length; i++){
+     						var row = result.rows.item(i);
+  							var index = row['COUNT'];
+  							
+  							var con = row['CONTENTS'];
+  							con = con.replace(/\n/gi,'<br/>');  
+
+  							document.getElementById('contentsList').innerHTML += "<table border='1' cellpadding='2' cellspacing='5' class='t_write'><tr><th BGCOLOR=#fff8dc class=c1>인덱스</th><td colspan=3>" + index + "</td></tr><tr><th BGCOLOR=#fff8dc class=c1>제목</th><td  colspan=3>"
+  							+ row['TITLE'] + "</td></tr><tr><th  BGCOLOR=#fff8dc class=c1>이름</th><td>" + row['NAME'] + "</td><th BGCOLOR=#fff8dc class=c1>날짜</th><td>" + row['INPUTDAY'] + "</td></tr><tr><th colspan=5 BGCOLOR=#fff8dc class=c1>내용</th></tr><tr><td colspan=5>"
+  							+ con + "</td></tr><tr><td><button id='txButton' value=" + index + " onClick='deleteData("+index+")'>지우기" 
+  							+ index + "</button></td><td><button id='txUpdate' value="
+  							+ index + " onClick='selectData("+index+")'>불러오기" + index + "</button></td><td><button id='txComment' value=" + index + " onClick='loadComment("+index+")'>댓글부르기"
+  							+ index + "</button></td></tr></table></br></br>";
+  							
+  							index++;
+ 						}//for end        
+   					}); //inner function end
+  			}); //db.transaction end
+ 		}
+
+  		function selectData(index){
+ 			// one contents
+  			db.transaction(function(tx){
+   				tx.executeSql("select * from COMMENT where COUNT=?",[index],
+   					function(tx, result){            
+    					for(var i = 0; i < result.rows.length; i++){
+     						var row = result.rows.item(i);
+  							var number = row['COUNT'];
+  							var title = row['TITLE'];
+  							var name = row['NAME'];
+  							var contents = row['CONTENTS'];
+  							var ref = row['REFCNT'];
+  
+  							document.getElementById('buttonT').innerHTML = "<button id='txUpdate' value=" + number + " onClick='updateData("+number+"), myRefresh()'>수정</button>";
+
+  							txTitle.value = title;
+  							txName.value = name;
+  							txContents.value = contents; // 위에다가 내용 표기 성공(불러오기)
+ 						}//for end         
+   					}); //inner function end         
+  				});
+ 		}
+ 
+ 
+		function updateData(index){
+			console.log(index + "번");
+			console.log(txTitle.value);
+			console.log(txName.value);
+			console.log(txContents.value);
+			console.log(index);
+
+			db.transaction(function(tx){
+   				tx.executeSql("update COMMENT set TITLE=?, NAME=?, CONTENTS=? where COUNT=?", [txTitle.value, txName.value, txContents.value, index]); // 
+  			});
+		}
+
+		function deleteData(index){
+			console.log(index + "메소드 실행 테스트");
+ 			db.transaction(function(tx){
+  				tx.executeSql("delete from COMMENT where COUNT=?", [index]);
+ 			});
+ 			
+ 			myRefresh();
+		}//funcion end
+		
+		function myRefresh(){
+			setTimeout("history.go(0);", 10);
+		}
+		
+		var winObject = null;
+		
+		function loadComment(index) {
+		 	console.log(index + "번");
+    		var settings = 'toolbar=0,directories=0,status=no,menubar=0,scrollbars=auto,resizable=no,height=200,width=200,left=0,top=0';
+    		winObject = window.open("comment.html?index="+index, "", settings); 	
+   		}
+</script>
+
+</head>
+<body onLoad="createDB(), createTable(), selectAllData(), get()">
+
+	<table align="center" border='1' id='mainTable'>
+		<strong style=''><center>글 쓰기</center></strong>
+		</caption>
+		<th>제목</th>
+		<td><input type="text" id="txTitle"></td>
+
+		<tbody>
+			<tr>
+				<th>이름</th>
+				<td><input type="text" id="txName"></td>
+		</tbody>
+
+		<tbody>
+			<tr>
+				<th>내용</th>
+				<td><textarea id="txContents" rows="10" cols="100"></textarea></td>
+		</tbody>
+
+
+
+	</table>
+
+	<table align="center" id="buttonT">
+		<tr>
+			<td><center>
+					<button onClick="insertData()">입력</button>
+				</center></td>
+		</tr>
+	</table>
+
+
+
+
+	<br />
+	<br />
+	<hr width=1640 size=10 noshade>
+	<br />
+
+	<strong><center>글 리스트</center></strong>
+	<!--<table id="contentsList" border = "1"><tr><td>인덱스</td><td>제목</td><td>날짜</td><td>이름</td><td>내용</td><td>지우기 버튼</td><td>불러오기 버튼</td></table>-->
+	<table align="center" id="contentsList" border="1" cellpadding="2"
+		cellspacing="5"></table>
+	<br />
+</body>
+</body>
+</html>
