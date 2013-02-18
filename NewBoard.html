@@ -3,21 +3,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Board</title>
-<script type='text/javascript'
-	src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min..js'></script>
-<script type='text/javascript'
-	src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min..js'></script>
+<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min..js'></script>
+<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min..js'></script>
 
 <script type='text/javascript' src='BoardJS.js'></script>
 <script type="text/javascript" src="jquery-1.9.1.min.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="http://malsup.github.com/jquery.corner.js"></script>
-<!-- 모서리 둥글게 할 계획. 일단 실패 -->
+
 <link rel='Stylesheet' type='text/css' href='common.css' />
 <link rel='Stylesheet' type='text/css' href='TableCss.css' />
-<link rel="stylesheet"
-	href="http://code.jquery.com/ui/1.8.22/themes/black-tie/jquery-ui.css">
-<!-- 검정 버튼 -->
+<!-- 검정 버튼  <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.22/themes/black-tie/jquery-ui.css">-->
+
 <link rel='Stylesheet' type='text/css'
 	href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/themes/smoothness/jquery-ui.css' />
 
@@ -29,7 +25,7 @@
 	<br />
 	<br />
 	<div id="wrap">
-		<div id="header">사원 이혜균 - Q&A Board</div>
+		<div id="header">사원 이혜균 - Q & A Board</div>
 		<div id="container">
 			<div class="snb">
 
@@ -47,7 +43,9 @@
 					<button id='writeBtn'
 						class="ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all button_07eml"
 						>쓰기</button>
-
+		
+						<div id="pager"></div>
+ 
 				</div>
 			</div>
 			<div id="content" align="center" style="overflow-y: scroll;">
@@ -57,13 +55,13 @@
 						bordercolor="#0176B4">
 						<th BGCOLOR=#fff8dc>제목</th>
 						<td style="bordercolor: #0176B4"><input type="text"
-							id="txTitle" size="90"></td>
+							id="txTitle" size="88"></td>
 
 						<tbody>
 							<tr>
 								<th BGCOLOR=#fff8dc>이름</th>
 								<td style="bordercolor: #0176B4"><input type="text"
-									id="txName" size="90"></td>
+									id="txName" size="88"></td>
 							</tr>
 						</tbody>
 
@@ -71,7 +69,7 @@
 							<tr>
 								<th BGCOLOR=#fff8dc>내용</th>
 								<td style="bordercolor: #0176B4"><textarea id="txContents"
-										rows="10" cols="111"></textarea></td>
+										rows="10" cols="77"></textarea></td>
 							</tr>
 						</tbody>
 
