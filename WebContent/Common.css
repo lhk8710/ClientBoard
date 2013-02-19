@@ -1,0 +1,130 @@
+<style type="text/css">
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	_text-align: center;
+}
+
+#searchlabel{
+	font-weight: bolder;
+	vertical-align: middle;
+}
+
+button{
+	vertical-align: middle;
+}
+
+#wrap {
+	width: 1300px;
+	_text-align: left;
+	margin: 0 auto;
+}
+
+#header {
+	width: 100%;
+}
+
+#container {
+	width: 100%;
+}
+
+.snb {
+	width: 380px;
+	float: left;
+}
+
+#tabs{
+	position: absolute;
+	z-index: 1;
+	top: 200px;
+	margin-top: 150px;
+	width: 375px;
+	height: 420px;
+	background: #fff;
+	border: 1px solid #bdbdbd;
+}
+
+#content {
+	width: 100px;
+	float: right;
+}
+
+#footer {
+	width: 100%;
+}
+
+.clear {
+	display: block;
+	float: none;
+	clear: both;
+	height: 0;
+	width: 100%;
+	font-size: 0 !important;
+	line-height: 0 !important;
+	overflow: hidden;
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+div {
+	padding: 10px 0;
+	margin: 0 0 10px 0;
+	font: bold 14px Tahoma;
+	color: #2D2C2D;
+}
+
+#wrap {
+	padding: 10px;
+	_width /**/: 620px;
+	border: 1px solid #bdbdbd;
+	background: #f7f7f7;
+}
+
+#header {
+	margin-top: 10px;
+}
+
+#header,#container {
+	padding: 10px;
+	border: 2px solid #bfbfbf;
+	background: #e5e5e5;
+}
+
+#header,#container {
+	width: auto;
+}
+
+.snb,#content {
+	margin-top: 10px;
+	background: #fff;
+	border: 1px solid #bdbdbd;
+	text-align: center;
+}
+
+#content {
+	width: 880px;
+	height: 600px;
+}
+
+#footer {
+	padding: 10px;
+	background: #e5e5e5;
+	border: 2px solid #bfbfbf;
+	width: auto;
+}
+
+#mask {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	z-index: 9000;
+	background-color: #000;
+	display: table-column;
+}
+</style>

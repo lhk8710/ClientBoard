@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Board</title>
+
+<script type='text/javascript' src='BoardJS.js'></script> <!-- 게시판 DB 자바스크립트 -->
+<script type="text/javascript" src="jquery-1.9.1.min.js"></script> <!-- 기본 Jquery -->
+
+<link rel='Stylesheet' type='text/css' href='Common.css' /> <!-- 전체 레이아웃 -->
+<link rel='Stylesheet' type='text/css' href='TableCss.css' /> <!-- 테이블 구성 -->
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> <!-- Tab & CSS --> 
+<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script> <!-- Tab -->
+
+</head>
+<body onLoad="createDB(), createTable(), selectAllData(), init()">
+	<div id="mask" align="center"></div> <!-- 내용 보기 영역 -->
+	<br />
+	<br />
+	<br />
+	<br />
+	<div id="wrap"> <!--  -->
+		<div id="header">사원 이혜균 - Q & A Board</div>
+		<div id="container">
+			<div class="snb"> <!-- 검색어 전체 영역 -->
+				<div align="center">
+					검색어를 입력하세요.<br />
+					<br /> <select id="searchID" class="searchClass" name="search">
+						<option value="01" selected="selected">이름</option>
+						<option value="02">제목</option>
+						<option value="03">내용</option>
+					</select> <input type="text" id="txSearch">&nbsp;
+					<button id='searchBtn'
+						class="ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all button_07eml"
+						onClick='search()'>검색</button>
+
+					<button id='writeBtn'
+						class="ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all button_07eml"
+						>쓰기</button>
+		
+						<div id="pager"></div> <!-- 페이지 영역 -->
+				</div>
+			</div>
+			
+			<div id="tabs">
+					<ul>
+						<li><a href="#tabs-1">IT/전자 기기</a></li>
+						<li><a href="#tabs-2">취미 생활</a></li>
+						<li><a href="#tabs-3">경제</a></li>
+						<li><a href="#tabs-4">기타</a></li>
+					</ul>
+					<div id="tabs-1">
+						<p>
+							<h4 class='showCategoryList' id='showCategoryList'>▼</h4>
+								<div id='innercategorylist'>
+									&nbsp;&nbsp;-&nbsp;<font>C 프로그래밍</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>JAVA 프로그래밍</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>C# 프로그래밍</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>C++ 프로그래밍</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>Serverside Language</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>Android Programming</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>iPhone Programming</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>Android 휴대폰</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>iPhone 휴대폰</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>데스크탑</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>노트북</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>태블릿 PC</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>TV</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>Audio & Video</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>가전 제품</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>기타 가전 제품</font><br/>
+								</div>
+						</p>
+					</div>
+					<div id="tabs-2">
+						<p>
+							<h4 class='showCategoryList' id='showCategoryList'>▼</h4>
+								<div id='innercategorylist'>
+									&nbsp;&nbsp;-&nbsp;<font>축구</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>농구</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>야구</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>영화 감상</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>음악 감상</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>등산</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>게임</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>드라마</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>쇼 & 오락 버라이어티</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>드라이브</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>맛집 기행</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>Extreme Sports</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>수집</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>악기 연주</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>DJ</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>기타 취미</font><br/>
+								</div>
+						</p>
+					</div>
+					<div id="tabs-3">
+						<p>
+							<h4 class='showCategoryList' id='showCategoryList'>▼</h4>
+								<div id='innercategorylist'>
+									&nbsp;&nbsp;-&nbsp;<font>금융</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>부동산</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>세금</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>세무</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>경영</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>무역</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>직업</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>취업</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>창업</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>경제</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>정책</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>제도</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>경제 동향</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>경제 기관</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>주식</font><br/>
+									&nbsp;&nbsp;-&nbsp;<font>기타 경제</font><br/>
+								</div>
+						</p>
+					</div> <!-- tab-3 -->
+					
+					<div id="tabs-4">
+						<p>
+							<h4 class='showCategoryList' id='showCategoryList'>▼</h4>
+								<div id='innercategorylist'>
+									&nbsp;&nbsp;-&nbsp;<font>기타 질문</font><br/>							
+								</div>
+						</p>
+					</div> <!-- tab-4 -->
+					
+				</div><!-- tabs -->
+			
+			<div id="content" align="center" style="overflow-y: scroll;"> <!-- 센터 내용  -->
+				<div class="write" id="writeid" align="center">
+					<h3 id="showwrite" hidden='true'>질문 올리기</h3>
+					<table border='1' id='mainTable' class='t_write'
+						bordercolor="#0176B4">
+						<th BGCOLOR=#fff8dc>제목</th>
+						<td style="bordercolor: #0176B4"><input type="text"
+							id="txTitle" size="117"></td>
+
+						<tbody>
+							<tr>
+								<th BGCOLOR=#fff8dc>이름</th>
+								<td style="bordercolor: #0176B4"><input type="text"
+									id="txName" size="117"></td>
+							</tr>
+						</tbody> <!-- 이름 쓰기 -->
+
+						<tbody>
+							<tr>
+								<th BGCOLOR=#fff8dc>분류</th>
+								<td style="bordercolor: #0176B4"><select id="categoryID"
+									class="categoryClass" name="category">
+										<option value="01" selected="true">IT/전자 기기</option>
+										<option value="02">취미 생활</option>
+										<option value="03">경제</option>
+										<option value="04">기타</option>
+								</select> <select id='categoryID2'>
+										<option value='001'>C 프로그래밍</option>
+										<option value='002'>JAVA 프로그래밍</option>
+										<option>C# 프로그래밍</option>
+										<option>C++ 프로그래밍</option>
+										<option>Serverside Language</option>
+										<option>Android Programming</option>
+										<option>iPhone Programming</option>
+										<option>Android 휴대폰</option>
+										<option>iPhone 휴대폰</option>
+										<option>데스크탑</option>
+										<option>노트북</option>
+										<option>태블릿 PC</option>
+										<option>TV</option>
+										<option>Audio & Video</option>
+										<option>가전 제품</option>
+										<option>기타 가전 제품</option>
+								</select></td>
+							</tr>
+						</tbody> <!-- 카테고리 기록 -->
+
+						<tbody>
+							<tr>
+								<th BGCOLOR=#fff8dc>내용</th>
+								<td style="bordercolor: #0176B4"><textarea id="txContents"
+										rows="10" cols="101"></textarea></td>
+							</tr>
+						</tbody> <!-- 내용 쓰기 -->
+
+						<tbody>
+							<tr>
+								<th BGCOLOR=#fff8dc>비번</th>
+								<td style="bordercolor: #0176B4"><input type="password"
+									id="txPW" maxlength="4"></td>
+							</tr>
+						</tbody>
+					</table>
+					
+					<p id='buttonT'>
+						<button id='insertBtn'
+							class="ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all button_07eml"
+							onClick="insertData()">질문 올리기</button>
+					</p>
+					
+				</div>
+
+				<div id="contentsList" class='testList' align="center">
+					<h3 id="showlist" align="center">List</h3>
+					<table border='1' cellpadding='2' cellspacing='5' class='t_write'
+						id='newTestBoard'></table>
+				</div>
+
+				<div id="searchResult" hidden="true" align="center">
+					<p></p>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div id="footer">2013/02/06 시작</div> <!-- 아래 영역 -->
+	</div>
+</body>
+</html>
